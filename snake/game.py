@@ -30,15 +30,21 @@ def run():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            elif event.type == pygame.KEYDOWN and not game_over:
-                if event.key == pygame.K_UP:
-                    snake.set_direction((0, -GRID))
-                elif event.key == pygame.K_DOWN:
-                    snake.set_direction((0, GRID))
-                elif event.key == pygame.K_LEFT:
-                    snake.set_direction((-GRID, 0))
-                elif event.key == pygame.K_RIGHT:
-                    snake.set_direction((GRID, 0))
+            elif event.type == pygame.KEYDOWN:
+                if game_over and event.key == pygame.K_r:
+                    snake = Snake()
+                    food = Food()
+                    score = 0
+                    game_over = False
+                elif not game_over:
+                    if event.key == pygame.K_UP:
+                        snake.set_direction((0, -GRID))
+                    elif event.key == pygame.K_DOWN:
+                        snake.set_direction((0, GRID))
+                    elif event.key == pygame.K_LEFT:
+                        snake.set_direction((-GRID, 0))
+                    elif event.key == pygame.K_RIGHT:
+                        snake.set_direction((GRID, 0))
 
         if not game_over:
             snake.move()
