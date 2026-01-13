@@ -17,5 +17,5 @@ class Food:
                 break
 
     def draw(self, surface):
-        rect = pygame.Rect(*self.position, GRID, GRID)
-        pygame.draw.rect(surface, RED, rect)
+        rect = pygame.Rect(*self.position, GRID - 2, GRID - 2)
+        pygame.draw.rect(surface, RED, rect, border_radius=GRID // 2)
