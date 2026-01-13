@@ -1,5 +1,5 @@
 import pygame
-from snake.settings import WIDTH, HEIGHT, FPS, BLACK, WHITE, GRID
+from snake.settings import WIDTH, HEIGHT, BASE_FPS, BLACK, WHITE, GRID, BG
 from snake.snake import Snake
 from snake.food import Food
 
@@ -11,6 +11,10 @@ def _hit_wall(head):
 
 def _hit_self(body):
     return body[0] in body[1:]
+
+
+def _calc_fps(score):
+    return min(BASE_FPS + score // 30, 20)
 
 
 def run():
@@ -55,7 +59,7 @@ def run():
             if _hit_wall(snake.body[0]) or _hit_self(snake.body):
                 game_over = True
 
-        screen.fill(BLACK)
+        screen.fill(BG)
         snake.draw(screen)
         food.draw(screen)
         score_text = font.render(f"Score: {score}", True, WHITE)
@@ -64,6 +68,6 @@ def run():
             msg = font.render("GAME OVER - pressione R", True, WHITE)
             screen.blit(msg, (WIDTH // 2 - 160, HEIGHT // 2))
         pygame.display.flip()
-        clock.tick(FPS)
+        clock.tick(_calc_fps(score))
 
     pygame.quit()
