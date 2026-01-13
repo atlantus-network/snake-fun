@@ -27,5 +27,5 @@ class Snake:
         from snake.settings import GREEN, DARK_GREEN
         for i, (x, y) in enumerate(self.body):
             color = DARK_GREEN if i == 0 else GREEN
-            rect = pygame.Rect(x, y, GRID, GRID)
-            pygame.draw.rect(surface, color, rect)
+            rect = pygame.Rect(x, y, GRID - 1, GRID - 1)
+            pygame.draw.rect(surface, color, rect, border_radius=4)
