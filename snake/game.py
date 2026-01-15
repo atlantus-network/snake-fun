@@ -1,7 +1,8 @@
 import pygame
-from snake.settings import WIDTH, HEIGHT, BASE_FPS, BLACK, WHITE, GRID, BG
+from snake.settings import WIDTH, HEIGHT, BASE_FPS, WHITE, GRID, BG
 from snake.snake import Snake
 from snake.food import Food
+from snake.highscore import load_highscore, save_highscore
 
 
 def _hit_wall(head):
@@ -27,6 +28,7 @@ def run():
     snake = Snake()
     food = Food()
     score = 0
+    highscore = load_highscore()
     game_over = False
 
     running = True
@@ -56,13 +58,15 @@ def run():
                 snake.grow()
                 food.respawn(snake.body)
                 score += 10
+                highscore = save_highscore(score)
             if _hit_wall(snake.body[0]) or _hit_self(snake.body):
                 game_over = True
+                highscore = save_highscore(score)
 
         screen.fill(BG)
         snake.draw(screen)
         food.draw(screen)
-        score_text = font.render(f"Score: {score}", True, WHITE)
+        score_text = font.render(f"Score: {score}  Best: {highscore}", True, WHITE)
         screen.blit(score_text, (10, 10))
         if game_over:
             msg = font.render("GAME OVER - pressione R", True, WHITE)
