@@ -21,3 +21,10 @@ python main.py
 ## Licença
 
 MIT
+
+## Atalhos
+
+| Tecla | Ação |
+|-------|------|
+| ↑↓←→ | Mover |
+| R | Reiniciar |
